@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cloud Academy Sample Static Website</title>
+  <link rel="stylesheet" href="/pico.css">
+</head>
+<body>
+  <main class="container-fluid">
+    <p><img id="IdName" src="/logo.png" alt="Logo" class="className"></p>
+    <p>Sample Static Website Application</p>
+    <div class="grid">
+      <div>
+        <article class="card">
+          <header>
+            HTTP Request Headers
+          </header>
+          <table style="font-size: 10px; word-break: break-word;">
+            <tbody id="tbody">
+              <tr>
+                <th>Name</th>
+                <th>Value</th>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+    </div>
+  </main>
+
+<script>
+var req = new XMLHttpRequest();
+req.open('GET', document.location, false);
+req.send(null);
+var headers = req.getAllResponseHeaders().toLowerCase();
+for (header of headers.split(/\r?\n/)) { 
+  var parts = header.split(/:(.+)/);
+  var element = '<tr>' +
+                '<td style="width: 30%;"><code>' + parts[0].trim() + '</code></td>' +
+                '<td><code>' + parts[1].trim() + '</code></td>' +
+                '</tr>';
+  document.getElementById("tbody").insertAdjacentHTML('beforeend', element);
+}
+</script>
+
+</body>
+</html>
